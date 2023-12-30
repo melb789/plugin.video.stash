@@ -42,7 +42,7 @@ class StashInterface:
                 "GraphQL query failed:{} - {}. Query: {}. Variables: {}".format(response.status_code, response.content,
                                                                                 query, variables))
 
-    def find_scenes(self, scene_filter=None, sort_field='title', sort_dir='asc'):
+    def find_scenes(self, scene_filter=None, sort_field='created_at', sort_dir='desc'):
         query = """
 query findScenes($scene_filter: SceneFilterType, $filter: FindFilterType!) {
   findScenes(scene_filter: $scene_filter, filter: $filter) {
@@ -83,7 +83,7 @@ query findScenes($scene_filter: SceneFilterType, $filter: FindFilterType!) {
 
         variables = {'filter': {
             'per_page': -1,
-            'sort': sort_field if sort_field is not None else 'title',
+            'sort': sort_field if sort_field is not None else 'created_at',
             'direction': 'DESC' if sort_dir.lower() == 'desc' else 'ASC'
         }}
 
@@ -269,7 +269,7 @@ query findStudios($studio_filter: StudioFilterType, $filter: FindFilterType!) {
 
         return result["findStudios"]["count"], result["findStudios"]["studios"]
 
-    def find_scene_markers(self, markers_filter=None, sort_field='title', sort_dir=0):
+    def find_scene_markers(self, markers_filter=None, sort_field='created_at', sort_dir=0):
         query = """
 query findSceneMarkers($markers_filter: SceneMarkerFilterType, $filter: FindFilterType!) {
   findSceneMarkers(scene_marker_filter: $markers_filter, filter: $filter) {
@@ -321,7 +321,7 @@ query findSceneMarkers($markers_filter: SceneMarkerFilterType, $filter: FindFilt
 
         variables = {'filter': {
             'per_page': -1,
-            'sort': sort_field if sort_field is not None else 'title',
+            'sort': sort_field if sort_field is not None else 'created_at',
             'direction': 'DESC' if sort_dir == 1 else 'ASC'
         }}
 
