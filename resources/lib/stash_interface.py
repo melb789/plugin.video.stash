@@ -84,7 +84,7 @@ query findScenes($scene_filter: SceneFilterType, $filter: FindFilterType!) {
         variables = {'filter': {
             'per_page': -1,
             'sort': sort_field if sort_field is not None else 'created_at',
-            'direction': 'DESC' if sort_dir.lower() == 'desc' else 'ASC'
+            'direction': 'ASC' if sort_dir.lower() == 'asc' else 'DESC'
         }}
 
         if scene_filter is not None:
