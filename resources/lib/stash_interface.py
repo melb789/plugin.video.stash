@@ -42,7 +42,7 @@ class StashInterface:
                 "GraphQL query failed:{} - {}. Query: {}. Variables: {}".format(response.status_code, response.content,
                                                                                 query, variables))
 
-    def find_scenes(self, scene_filter=None, sort_field='created_at', sort_dir='desc'):
+    def find_scenes(self, scene_filter=None, sort_field='created_at', sort_dir='asc'):
         query = """
 query findScenes($scene_filter: SceneFilterType, $filter: FindFilterType!) {
   findScenes(scene_filter: $scene_filter, filter: $filter) {
@@ -84,7 +84,7 @@ query findScenes($scene_filter: SceneFilterType, $filter: FindFilterType!) {
         variables = {'filter': {
             'per_page': -1,
             'sort': sort_field if sort_field is not None else 'created_at',
-            'direction': 'ASC' if sort_dir.lower() == 'asc' else 'DESC'
+            'direction': 'ASC' if sort_dir.lower() == 'asc' else 'ASC'
         }}
 
         if scene_filter is not None:
